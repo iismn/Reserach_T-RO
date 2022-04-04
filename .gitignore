@@ -1,0 +1,7 @@
+*.png
+*.tar
+*.hdf5
+*.npy
+src/datasets/
+src/runs/
+src/data

@@ -1,0 +1,7 @@
+<launch>
+    <arg name="project" default="agv_ai_module"/>
+  	<!-- <node pkg="agv_ai_module" type="main_MCL.py" name="agv_ai_module_MCL" output="screen"/> -->
+    <!-- <node pkg="agv_ai_module" type="main_TPL.py" name="agv_ai_module_MATCH" output="screen"/> -->
+  	<node pkg="agv_ai_module" type="main_VIS.py" name="agv_ai_module_node" output="screen"/>
+    <!-- <node pkg="tf" type="static_transform_publisher" name="local_map_tf" args="455932 5425881 0 0 0 0 1 world local_map 100" /> -->
+</launch>
