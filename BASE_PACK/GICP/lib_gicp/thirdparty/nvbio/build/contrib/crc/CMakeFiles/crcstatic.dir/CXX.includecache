@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/root/Workspace-IISMN/ROS-BASE/NvBIO/nvbio/contrib/crc/crc.cpp
+crc.h
+/home/root/Workspace-IISMN/ROS-BASE/NvBIO/nvbio/contrib/crc/crc.h
+
+/home/root/Workspace-IISMN/ROS-BASE/NvBIO/nvbio/contrib/crc/crc.h
+

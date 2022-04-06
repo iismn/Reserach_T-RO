@@ -1,0 +1,42 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/htslib.dir/bgzf.c.o"
+  "CMakeFiles/htslib.dir/bgzip.c.o"
+  "CMakeFiles/htslib.dir/cram/cram_codecs.c.o"
+  "CMakeFiles/htslib.dir/cram/cram_decode.c.o"
+  "CMakeFiles/htslib.dir/cram/cram_encode.c.o"
+  "CMakeFiles/htslib.dir/cram/cram_index.c.o"
+  "CMakeFiles/htslib.dir/cram/cram_io.c.o"
+  "CMakeFiles/htslib.dir/cram/cram_samtools.c.o"
+  "CMakeFiles/htslib.dir/cram/cram_stats.c.o"
+  "CMakeFiles/htslib.dir/cram/files.c.o"
+  "CMakeFiles/htslib.dir/cram/mFILE.c.o"
+  "CMakeFiles/htslib.dir/cram/md5.c.o"
+  "CMakeFiles/htslib.dir/cram/open_trace_file.c.o"
+  "CMakeFiles/htslib.dir/cram/pooled_alloc.c.o"
+  "CMakeFiles/htslib.dir/cram/sam_header.c.o"
+  "CMakeFiles/htslib.dir/cram/string_alloc.c.o"
+  "CMakeFiles/htslib.dir/cram/thread_pool.c.o"
+  "CMakeFiles/htslib.dir/cram/vlen.c.o"
+  "CMakeFiles/htslib.dir/cram/zfio.c.o"
+  "CMakeFiles/htslib.dir/faidx.c.o"
+  "CMakeFiles/htslib.dir/hfile.c.o"
+  "CMakeFiles/htslib.dir/hfile_net.c.o"
+  "CMakeFiles/htslib.dir/hts.c.o"
+  "CMakeFiles/htslib.dir/kfunc.c.o"
+  "CMakeFiles/htslib.dir/knetfile.c.o"
+  "CMakeFiles/htslib.dir/kstring.c.o"
+  "CMakeFiles/htslib.dir/sam.c.o"
+  "CMakeFiles/htslib.dir/synced_bcf_reader.c.o"
+  "CMakeFiles/htslib.dir/tabix.c.o"
+  "CMakeFiles/htslib.dir/tbx.c.o"
+  "CMakeFiles/htslib.dir/vcf.c.o"
+  "CMakeFiles/htslib.dir/vcf_sweep.c.o"
+  "CMakeFiles/htslib.dir/vcfutils.c.o"
+  "libhtslib.a"
+  "libhtslib.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang C)
+  include(CMakeFiles/htslib.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

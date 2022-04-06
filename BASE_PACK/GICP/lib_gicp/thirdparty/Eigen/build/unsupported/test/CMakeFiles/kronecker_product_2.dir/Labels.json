@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/root/Workspace-IISMN/ROS/src/SLAM_PACK/BASE-PACK/GICP/fast_gicp/thirdparty/Eigen/unsupported/test/kronecker_product.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"BuildUnsupported"
+		],
+		"name" : "kronecker_product_2"
+	}
+}

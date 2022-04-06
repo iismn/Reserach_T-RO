@@ -1,0 +1,16 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/root/Workspace-IISMN/ROS/src/SLAM_PACK/BASE-PACK/GICP/fast_gicp/thirdparty/Eigen/test/product_trmv.cpp"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"BuildOfficial"
+		],
+		"name" : "product_trmv_1"
+	}
+}

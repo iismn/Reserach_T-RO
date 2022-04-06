@@ -1,0 +1,2 @@
+/usr/bin/ar qc libbamtools.a CMakeFiles/bamtools.dir/BamReader.cpp.o CMakeFiles/bamtools.dir/BamWriter.cpp.o CMakeFiles/bamtools.dir/BGZF.cpp.o
+/usr/bin/ranlib libbamtools.a
