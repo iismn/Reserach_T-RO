@@ -18,7 +18,7 @@ DB.List_UTM_3D = dir('**/POS_3D');
 % Parameter
 DatabaseName = 'Urban_25K/';
 DatabaseSort = 'Test';
-DatabaseMatName = 'Urban_25K_URBAN33';
+DatabaseMatName = 'Urban_25K_Urban26';
 imgResize = 0;
 Val_SplitRatio = 1.2;
 Test_SplitRatio = 1;
@@ -111,7 +111,8 @@ for i = 1:size(DB.List_3D,1)
     Full_Path = strcat(F_Path,'/',F_Name);
     
     LOCAL_Coordinate_IO = textscan(fopen(Full_Path),'%f64 %f64');
-    LOCAL_Coordinate_IO = cell2mat(LOCAL_Coordinate_IO) + [UTM_ST_X UTM_ST_Y];
+    LOCAL_Coordinate_IO = cell2mat(LOCAL_Coordinate_IO);
+%     LOCAL_Coordinate_IO = cell2mat(LOCAL_Coordinate_IO) + [UTM_ST_X UTM_ST_Y];
     FList_UTM_3D = [FList_UTM_3D; LOCAL_Coordinate_IO];
     
     fclose all;
@@ -120,7 +121,7 @@ end
 
 FList_2D = FList_2D';
 FList_3D = FList_3D';
-FList_UTM_3D = FList_UTM_3D';
+FList_UTM_3D = FList_UTM_2D';
 
 %% C. Generating Validation Set
 % Initialize Parameter Database
@@ -163,16 +164,16 @@ for i = 1:round(size(FList_2D,1)/Test_SplitRatio)
     end
     
     FList_2D_Test{end+1} = FList_2D{iter};
-    FList_3D_Test{end+1} = FList_3D{i};
-    FList_UTM_Test = [FList_UTM_Test FList_UTM_3D(:,i)];
+%     FList_3D_Test{end+1} = FList_3D{i};
+    FList_UTM_Test = [FList_UTM_Test FList_UTM_2D(:,i)];
     
 end
 
 pause(2)
 fprintf('[DB Geneator] : Test Generating Done\n')
 FList_2D_Test = FList_2D_Test';
-FList_3D_Test = FList_3D_Test';
-
+% FList_3D_Test = FList_3D_Test';
+FList_3D_Test = FList_2D_Test';
 
 %% D. MAT Generating for PyTorch NetVLAD Core
 

@@ -16,9 +16,9 @@ DB.List_UTM_2D = dir('**/POS_2D');
 DB.List_UTM_3D = dir('**/POS_3D');
 
 % Parameter
-DatabaseName = 'Urban_25K/';
+DatabaseName = 'DB_Test/';
 DatabaseSort = 'Test';
-DatabaseMatName = 'Urban_25K_KITTI06';
+DatabaseMatName = 'Urban_25K_SEJONG';
 imgResize = 0;
 Val_SplitRatio = 1.5;
 Test_SplitRatio = 2.16;
@@ -148,7 +148,7 @@ FList_2D_Test  ={};
 FList_3D_Test ={};
 FList_UTM_Test = [];
 
-for i = 1:round(size(FList_3D,1))
+for i = 1:round(size(FList_3D_Train,1))
     
     iter = i;
     
@@ -157,8 +157,8 @@ for i = 1:round(size(FList_3D,1))
     end
     
     FList_2D_Test{end+1} = FList_2D{iter};
-    FList_3D_Test{end+1} = FList_3D{i};
-    FList_UTM_Test = [FList_UTM_Test FList_UTM_3D(:,i)];
+    FList_3D_Test{end+1} = FList_3D{iter};
+    FList_UTM_Test = [FList_UTM_Test FList_UTM_3D(:,iter)];
     
 end
 
@@ -167,6 +167,30 @@ fprintf('[DB Geneator] : Test Generating Done\n')
 FList_2D_Test = FList_2D_Test';
 FList_3D_Test = FList_3D_Test';
 
+%% C-2. Generating Test Set (For Odometry Eval)
+% Initialize Parameter Database
+FList_2D_Test  ={};
+FList_3D_Test ={};
+FList_UTM_Test = [];
+
+for i = 1:round(size(FList_2D,1))
+    
+    iter = i;
+    
+    if iter >= size(FList_3D,1)
+         continue
+    end
+    
+    FList_2D_Test{end+1} = FList_2D{iter};
+    FList_3D_Test{end+1} = FList_3D{iter};
+    FList_UTM_Test = [FList_UTM_Test FList_UTM_3D(:,iter)];
+    
+end
+
+pause(2)
+fprintf('[DB Geneator] : Test Generating Done\n')
+FList_2D_Test = FList_2D_Test';
+FList_3D_Test = FList_3D_Test';
 
 %% D. MAT Generating for PyTorch NetVLAD Core
 

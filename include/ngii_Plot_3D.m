@@ -55,13 +55,13 @@ switch Case
                 X_Axis = [geojsonCoordinate_X(rem(j-1,length(geojsonCoordinate_X))+1), geojsonCoordinate_X(rem(j+1-1,length(geojsonCoordinate_X))+1)];
                 Y_Axis = [geojsonCoordinate_Y(rem(j-1,length(geojsonCoordinate_Y))+1), geojsonCoordinate_Y(rem(j+1-1,length(geojsonCoordinate_Y))+1)];
                 Z_Axis = zeros(size(X_Axis,2),1)';
-                plot3(X_Axis-Init_UTM(1), Y_Axis-Init_UTM(2), Z_Axis-200, 'yellow','LineWidth',2)
+                plot3(X_Axis-Init_UTM(1), Y_Axis-Init_UTM(2), Z_Axis-200,'Color', [0.5 0.5 0.5],'LineWidth',3)
 
             end
         end
         
         axis equal
-        set(gca,'Color','k')
+%         set(gca,'Color','k')
     case 'ROAD'
         for i = 1:length(geojsonValue.features)
 
@@ -106,7 +106,7 @@ switch Case
         end
         
         axis equal
-        set(gca,'Color','k')
+%         set(gca,'Color','k')
     otherwise
         warning('Select Case ''BUILDING'' or ''ROAD''');
 

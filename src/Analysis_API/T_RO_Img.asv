@@ -22,11 +22,11 @@ figure(1)
 scatter1 = scatter3(MAP_All_Temp.Location(:,1), MAP_All_Temp.Location(:,2),MAP_All_Temp.Location(:,3),1,'MarkerFaceColor','r','MarkerEdgeColor','k');
 scatter1.MarkerEdgeColor = [0.8 0.8 0.1];
 scatter1.MarkerFaceAlpha = .1;
-scatter1.MarkerEdgeAlpha = .5;
+scatter1.MarkerEdgeAlpha = .3;
 hold on; axis equal;
-plot3(MAP_Odom.Location(:,1), MAP_Odom.Location(:,2),MAP_Odom.Location(:,3)-200,'k','LineWidth',4)
-plot3(MAP_Odom.Location(:,1), MAP_Odom.Location(:,2),MAP_Odom.Location(:,3)-400,'k','LineWidth',4)
-plot3(MAP_Odom.Location(:,1), MAP_Odom.Location(:,2),MAP_Odom.Location(:,3),'black','LineWidth',4)
+plot3(MAP_Odom.Location(:,1), MAP_Odom.Location(:,2),MAP_Odom.Location(:,3)-200,'r','LineWidth',3)
+plot3(MAP_Odom.Location(:,1), MAP_Odom.Location(:,2),MAP_Odom.Location(:,3)-400,'g','LineWidth',3)
+plot3(MAP_Odom.Location(:,1), MAP_Odom.Location(:,2),MAP_Odom.Location(:,3),'black','LineWidth',3)
 grid off;
 
 latitude=36.3749136;
@@ -51,13 +51,13 @@ scatter2.MarkerEdgeAlpha = .5;
 X = [roi(1) roi(1) roi(2) roi(2) roi(1)];
 Y = [roi(3) roi(4) roi(4) roi(3) roi(3)];
 Z = [10 10 10 10 10];
-plot3(X,Y,Z,'-','LineWidth',4,'Color',[1 0 1])
+plot3(X,Y,Z,'-','LineWidth',4,'Color',[0 0 0])
 
 %% Submap Matching Line
 roi = [CenterPoint(1)-80 CenterPoint(1)+80 CenterPoint(2)-80 CenterPoint(2)+80 CenterPoint(3)-10 CenterPoint(3)+100];
 indices = findPointsInROI(MAP_Odom,roi);
 
-sizef=15;
+sizef=20;
 indices = indices(randsample(size(indices,1),sizef));
 MAP_Odom_Sub = select(MAP_Odom,indices);
 
@@ -65,8 +65,8 @@ for i = 1:sizef
     X = [CenterPoint(1) MAP_Odom_Sub.Location(i,1)];
     Y = [CenterPoint(2) MAP_Odom_Sub.Location(i,2)];
     Z = [CenterPoint(3) MAP_Odom_Sub.Location(i,3)-200];
-    plot3(X,Y,Z,'-','LineWidth',4,'Color',[1 0 1]);
-    scatter3(X(2),Y(2),Z(2)-200,100,'MarkerFaceColor','b','MarkerEdgeColor','b');   
+    plot3(X,Y,Z,'-','LineWidth',2,'Color',[1 0 1]);
+    scatter3(X(2),Y(2),Z(2)-200,100,'MarkerFaceColor','k','MarkerEdgeColor','k');   
 end
 
 %% Matched Particle Weight Plot
@@ -81,8 +81,8 @@ DistScore = normalize(DistScore,'range');
 for i =1:sizef
     X = [MAP_Odom_Sub.Location(i,1) MAP_Odom_Sub.Location(i,1)];
     Y = [MAP_Odom_Sub.Location(i,2) MAP_Odom_Sub.Location(i,2)];
-    Z = [-400  -400+100*(1-DistScore(i))];
-    S = plot3(X,Y,Z,'-','LineWidth',2,'Color',[0 0 1],'LineWidth',4);
+    Z = [-400  -400+100*(1-DistScore(i)];
+    S = plot3(X,Y,Z,'-','LineWidth',2,'Color',[0 1 0]);
 end
 
 

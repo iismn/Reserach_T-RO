@@ -10,35 +10,39 @@
 % Copyright 2021.9.15
 clc; clear;
 % map = pcread('GlobalMap.pcd');
-% Buildmap = pcread('BuildMap.pcd');
-% Roadmap = pcread('RoadMap.pcd');
-trajectory = pcread('trajectory.pcd');
+Buildmap = pcread('/home/iismn/WorkSpace/Research/MulRan_DCC/PointCloud/DB/BuildMap.pcd');
+Roadmap = pcread('/home/iismn/WorkSpace/Research/MulRan_DCC/PointCloud/DB/RoadMap.pcd');
+trajectory = pcread('/home/iismn/WorkSpace/Research/MulRan_DCC/PointCloud/DB/trajectory.pcd');
 
 %%
 % clc; clear; 
-SAVE_Path_2D = '/home/iismn/WorkSpace/Research/ComplexUrban_33/DeepLearningDB/2D/';
-SAVE_Path_3D = '/home/iismn/WorkSpace/Research/ComplexUrban_33/DeepLearningDB/3D/';
-SAVE_Path_POS = '/home/iismn/WorkSpace/Research/ComplexUrban_33/DeepLearningDB/POS_2D/';
+SAVE_Path_2D = '/home/iismn/WorkSpace/Research/MulRan_DCC/DeepLearningDB/2D/';
+SAVE_Path_3D = '/home/iismn/WorkSpace/Research/MulRan_DCC/DeepLearningDB/3D/';
+SAVE_Path_POS = '/home/iismn/WorkSpace/Research/MulRan_DCC/DeepLearningDB/POS_2D/';
 
 %% B. ROS BAG to START POINT
-COORD = [37.52233301	126.938584561667];
-Lat = COORD(1);
-Long =  COORD(2);
-[UTM_ST_X,UTM_ST_Y, ~] = deg2utm(Lat, Long);
+% COORD = [37.52233301	126.938584561667];
+% Lat = COORD(1);
+% Long =  COORD(2);
+% [UTM_ST_X,UTM_ST_Y, ~] = deg2utm(Lat, Long);
 
+% For MulRan
+UTM_ST_X = 355631.9159;
+UTM_ST_Y = 4026724.647;
 %% C. 2D NGII IMG CONVERTER
 % C1. Plot 2D Digital Map 
-rawB = fread(fopen('ComplexUrban_33_Build.geojson'),inf);
+geojson_Folder = '/home/iismn/WorkSpace/Research/IRIS_DCC/GeoJSON/';
+rawB = fread(fopen(strcat(geojson_Folder,'DCC_NGII_BUILD.geojson')),inf);
 rawB = char(rawB');
 geojsonValue_BUILD = jsondecode(rawB);
 
-rawR = fread(fopen('ComplexUrban_33_Road.geojson'),inf);
+rawR = fread(fopen(strcat(geojson_Folder,'DCC_NGII_ROAD.geojson')),inf);
 rawR = char(rawR');
 geojsonValue_ROAD = jsondecode(rawR);
 %% Image Saving
 %----------------------------------------------------------
 res = 1000;
-DISTMAP = 100;
+DISTMAP = 80;
 Output.Size = DISTMAP;
 map_Size = DISTMAP;
 %----------------------------------------------------------
@@ -70,7 +74,6 @@ end
 blankimage = ones(res,res,3);
 blankimage(:,:,:) = 0;
 Output.Img = blankimage;
-
 
 Iteration = size(Interpolated_Trajectory,1);
 
