@@ -369,10 +369,30 @@ public:
       pcl::PointCloud<PointType>::Ptr globalSurfCloud(new pcl::PointCloud<PointType>());
       pcl::PointCloud<PointType>::Ptr globalSurfCloudDS(new pcl::PointCloud<PointType>());
       pcl::PointCloud<PointType>::Ptr globalMapCloud(new pcl::PointCloud<PointType>());
+      pcl::PointCloud<PointType>::Ptr localMapCloud(new pcl::PointCloud<PointType>());
       for (int i = 0; i < (int)cloudKeyPoses3D->size(); i++) {
-          *globalCornerCloud += *transformPointCloud(cornerCloudKeyFrames[i],  &cloudKeyPoses6D->points[i]);
-          *globalSurfCloud   += *transformPointCloud(surfCloudKeyFrames[i],    &cloudKeyPoses6D->points[i]);
-          cout << "\r" << std::flush << "Processing feature cloud " << i << " of " << cloudKeyPoses6D->size() << " ...";
+        pcl::PointCloud<PointType>::Ptr localMapCloud(new pcl::PointCloud<PointType>());
+        *globalCornerCloud += *transformPointCloud(cornerCloudKeyFrames[i],  &cloudKeyPoses6D->points[i]);
+        *globalSurfCloud   += *transformPointCloud(surfCloudKeyFrames[i],    &cloudKeyPoses6D->points[i]);
+        
+        *localMapCloud += *transformPointCloud(cornerCloudKeyFrames[i],  &cloudKeyPoses6D->points[i]);
+        *localMapCloud += *transformPointCloud(surfCloudKeyFrames[i],  &cloudKeyPoses6D->points[i]);
+        // POS Extract Process
+        char filename [50];
+        sprintf(filename, "%08d", i);
+        ofstream fout;
+        fout.open(saveMapDirectory + "/" + filename + ".txt");
+        // fout << cloudKeyPoses6D->points[i].x << " " << cloudKeyPoses6D->points[i].y << " " << cloudKeyPoses6D->points[i].z << " " << cloudKeyPoses6D->points[i].roll << " " << cloudKeyPoses6D->points[i].pitch << " " << cloudKeyPoses6D->points[i].yaw << endl;
+        fout << setprecision(20);
+        fout << globalPath.poses[i].header.stamp.toSec() << " " << globalPath.poses[i].pose.position.x << " " << globalPath.poses[i].pose.position.y << " " << globalPath.poses[i].pose.position.z << 
+        " " << globalPath.poses[i].pose.orientation.x << " " << globalPath.poses[i].pose.orientation.y << " " << globalPath.poses[i].pose.orientation.z << " " << globalPath.poses[i].pose.orientation.w << endl;
+
+        fout.close();
+
+        pcl::io::savePCDFileBinary(saveMapDirectory + "/" + filename + ".pcd", *localMapCloud);
+
+        cout << "\r" << std::flush << "Processing feature cloud " << i << " of " << cloudKeyPoses6D->size() << " ...";
+
       }
 
       if(req.resolution != 0)

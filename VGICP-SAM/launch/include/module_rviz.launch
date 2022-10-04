@@ -1,8 +1,0 @@
-<launch>
-
-    <arg name="project" default="agv_global_module"/>
-
-    <!--- Run Rviz-->
-    <node pkg="rviz" type="rviz" name="$(arg project)_rviz" args="-d $(find agv_global_module)/launch/include/config/rviz.rviz" />
-
-</launch>

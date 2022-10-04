@@ -1,0 +1,12 @@
+<launch>
+
+    <arg name="project" default="agv_temp_module"/>
+
+    <!-- <node pkg="$(arg project)" type="$(arg project)_imuPreintegration"   name="$(arg project)_imuPreintegration"    output="screen" 	  respawn="true"/> -->
+    <node pkg="$(arg project)" type="$(arg project)_imageProjection_L"   name="$(arg project)_imageProjection_L"    output="screen"     respawn="true"/>
+
+    <node pkg="$(arg project)" type="$(arg project)_imageProjection_R"   name="$(arg project)_imageProjection_R"    output="screen"     respawn="true"/>
+    <node pkg="$(arg project)" type="$(arg project)_featureExtraction"   name="$(arg project)_featureExtraction"    output="screen"     respawn="true"/>
+    <node pkg="$(arg project)" type="$(arg project)_mapOptmization"      name="$(arg project)_mapOptmization"       output="screen"     respawn="true"/>
+
+</launch>

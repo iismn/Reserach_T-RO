@@ -75,7 +75,7 @@ endif()
 
 ### CUDA ###
 if(BUILD_VGICP_CUDA)
-  set(CUDA_NVCC_FLAGS "--expt-relaxed-constexpr")
+  set(CUDA_NVCC_FLAGS "--expt-relaxed-constexpr -arch=sm_86")
   add_definitions(-DUSE_VGICP_CUDA)
 
   cuda_add_library(fast_vgicp_cuda
