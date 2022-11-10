@@ -5,13 +5,13 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /DL_GLBAL1
         - /DL_GLBAL1/PCL1
         - /DL_GLBAL1/iSAM21/GTSAM LC CONST1
-        - /DL_LOCAL1/Map (Filtered)1
-        - /Grid1/Status1
+        - /DL1/MCL_Prd1
+        - /DL1/MCL_Prv1
         - /Grid1/Offset1
         - /Odometry1/Shape1
-        - /Odometry2/Shape1
       Splitter Ratio: 0.5742357969284058
     Tree Height: 1318
   - Class: rviz/Selection
@@ -138,10 +138,10 @@ Visualization Manager:
               Color: 170; 85; 255
               Color Transformer: Intensity
               Decay Time: 5
-              Enabled: true
+              Enabled: false
               Invert Rainbow: false
               Max Color: 255; 255; 255
-              Max Intensity: 137
+              Max Intensity: 255
               Min Color: 0; 0; 0
               Min Intensity: 0
               Name: LIDAR (Right/Deskewed)
@@ -155,7 +155,7 @@ Visualization Manager:
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
-              Value: true
+              Value: false
             - Alpha: 0.5
               Autocompute Intensity Bounds: true
               Autocompute Value Bounds:
@@ -168,10 +168,10 @@ Visualization Manager:
               Color: 255; 0; 127
               Color Transformer: Intensity
               Decay Time: 5
-              Enabled: true
+              Enabled: false
               Invert Rainbow: false
               Max Color: 255; 255; 255
-              Max Intensity: 124
+              Max Intensity: 100
               Min Color: 0; 0; 0
               Min Intensity: 0
               Name: LIDAR (Left/Deskewed)
@@ -185,7 +185,7 @@ Visualization Manager:
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
-              Value: true
+              Value: false
             - Alpha: 1
               Autocompute Intensity Bounds: true
               Autocompute Value Bounds:
@@ -288,7 +288,7 @@ Visualization Manager:
               Color: 181; 181; 181
               Color Transformer: FlatColor
               Decay Time: 0
-              Enabled: true
+              Enabled: false
               Invert Rainbow: false
               Max Color: 255; 255; 255
               Max Intensity: 202.47781372070312
@@ -305,7 +305,7 @@ Visualization Manager:
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
-              Value: true
+              Value: false
           Enabled: true
           Name: PCL
         - Class: rviz/Group
@@ -632,7 +632,7 @@ Visualization Manager:
       Name: DL_GLBAL
     - Class: rviz/Group
       Displays:
-        - Alpha: 1
+        - Alpha: 0.019999999552965164
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
             Max Value: 10
@@ -647,7 +647,7 @@ Visualization Manager:
           Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
-          Max Intensity: 255
+          Max Intensity: 247
           Min Color: 0; 0; 0
           Min Intensity: 0
           Name: Map (Filtered)
@@ -655,8 +655,8 @@ Visualization Manager:
           Queue Size: 10
           Selectable: true
           Size (Pixels): 1
-          Size (m): 0.009999999776482582
-          Style: Points
+          Size (m): 0.10000000149011612
+          Style: Spheres
           Topic: /RETRIEVAL_MODULE/LOCAL/MAP/Local
           Unreliable: false
           Use Fixed Frame: true
@@ -719,7 +719,7 @@ Visualization Manager:
       Name: DL_LOCAL
     - Class: rviz/Group
       Displays:
-        - Alpha: 1
+        - Alpha: 0.30000001192092896
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
             Max Value: 10
@@ -749,7 +749,7 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
-        - Alpha: 1
+        - Alpha: 0.30000001192092896
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
             Max Value: 10
@@ -826,42 +826,8 @@ Visualization Manager:
         Y: 0
         Z: 0
       Plane: XY
-      Plane Cell Count: 2
+      Plane Cell Count: 10
       Reference Frame: base_link
-      Value: true
-    - Angle Tolerance: 0.10000000149011612
-      Class: rviz/Odometry
-      Covariance:
-        Orientation:
-          Alpha: 0.5
-          Color: 255; 255; 127
-          Color Style: Unique
-          Frame: Local
-          Offset: 1
-          Scale: 1
-          Value: true
-        Position:
-          Alpha: 0.30000001192092896
-          Color: 204; 51; 204
-          Scale: 1
-          Value: true
-        Value: true
-      Enabled: true
-      Keep: 1
-      Name: Odometry
-      Position Tolerance: 0.10000000149011612
-      Shape:
-        Alpha: 1
-        Axes Length: 2
-        Axes Radius: 0.10000000149011612
-        Color: 255; 25; 0
-        Head Length: 0.30000001192092896
-        Head Radius: 0.10000000149011612
-        Shaft Length: 1
-        Shaft Radius: 0.05000000074505806
-        Value: Axes
-      Topic: /gt/odom
-      Unreliable: false
       Value: true
     - Angle Tolerance: 0.10000000149011612
       Class: rviz/Odometry
@@ -886,6 +852,40 @@ Visualization Manager:
       Position Tolerance: 0.10000000149011612
       Shape:
         Alpha: 1
+        Axes Length: 1
+        Axes Radius: 0.5
+        Color: 0; 255; 255
+        Head Length: 1
+        Head Radius: 2
+        Shaft Length: 0
+        Shaft Radius: 0.05000000074505806
+        Value: Arrow
+      Topic: /RETRIEVAL_MODULE/DL/UTM_MID
+      Unreliable: false
+      Value: true
+    - Angle Tolerance: 0.10000000149011612
+      Class: rviz/Odometry
+      Covariance:
+        Orientation:
+          Alpha: 0.5
+          Color: 255; 255; 127
+          Color Style: Unique
+          Frame: Local
+          Offset: 1
+          Scale: 1
+          Value: true
+        Position:
+          Alpha: 0.30000001192092896
+          Color: 204; 51; 204
+          Scale: 1
+          Value: true
+        Value: true
+      Enabled: true
+      Keep: 1
+      Name: Ground Truth Odom
+      Position Tolerance: 0.10000000149011612
+      Shape:
+        Alpha: 1
         Axes Length: 10
         Axes Radius: 0.5
         Color: 255; 25; 0
@@ -894,7 +894,7 @@ Visualization Manager:
         Shaft Length: 1
         Shaft Radius: 0.05000000074505806
         Value: Axes
-      Topic: /RETRIEVAL_MODULE/DL/UTM
+      Topic: /gt/odom
       Unreliable: false
       Value: true
   Enabled: true
@@ -913,25 +913,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 401.39251708984375
+      Distance: 163.29981994628906
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 614.7945556640625
-        Y: 167.92630004882812
-        Z: 2.8382604122161865
+        X: 3.008721351623535
+        Y: 4.854914665222168
+        Z: -3.8943803310394287
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
       Pitch: 1.5697963237762451
-      Target Frame: <Fixed Frame>
+      Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 4.708560466766357
+      Yaw: 4.629516124725342
     Saved: ~
 Window Geometry:
   Displays:
@@ -950,4 +950,4 @@ Window Geometry:
     collapsed: false
   Width: 3840
   X: 2160
-  Y: 490
+  Y: 927

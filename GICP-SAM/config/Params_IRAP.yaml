@@ -5,7 +5,7 @@ VGICP_SAM:
   pointCloudTopic_R: "ns1/velodyne_points"               # Point cloud data - RIGHT
   imuTopic: "imu/data_raw"                               # IMU data
   odomTopic: "odometry/imu"                              # IMU pre-preintegration odometry, same frequency as IMU
-  gpsTopic: "gt/odom"                            # GPS odometry topic from navsat, see module_navsat.launch file
+  gpsTopic: "ublox/fix/odom"                            # GPS odometry topic from navsat, see module_navsat.launch file
 
   # Frames
   lidarFrame: "base_link"
@@ -16,9 +16,9 @@ VGICP_SAM:
   # GPS Settings
   useImuHeadingInitialization: true           # if using GPS data, set to "true"
   useGpsElevation: true                       # if GPS elevation is bad, set to "false"
-  gpsCovThreshold: 0.1                       # m^2, threshold for using GPS data
+  gpsCovThreshold: 5                       # m^2, threshold for using GPS data
   poseCovThreshold: 0.01                      # m^2, threshold for using GPS data
-  loopClosureEnableFlag: true
+  loopClosureEnableFlag: false
   # Export settings
   savePCD: false
   savePCDDirectory: "/Downloads/LOAM/"        # in your home folder, starts and ends with "/". Warning: the code deletes "LOAM" folder then recreates it. See "mapOptimization" for implementation
@@ -65,10 +65,16 @@ VGICP_SAM:
   edgeFeatureMinValidNum: 10
   surfFeatureMinValidNum: 100
 
+  # G-ICP Parameters
+  TransformationEpsilon : 0.01
+  Resolution : 0.7
+  MaximumIterations : 60
+  MaxCorrespondenceDistance : 1.0
+
   # voxel filter paprams
-  odometryLeafSize: 0.01                        # default: 0.4 - outdoor, 0.2 - indoor
-  mappingCornerLeafSize: 1.0                    # default: 0.2 - outdoor, 0.1 - indoor
-  mappingLeafSize: 0.2                          # default: 0.4 - outdoor, 0.2 - indoor - VGICP Voxel Grid Filter
+  odometryLeafSize: 0.1                       # default: 0.4 - outdoor, 0.2 - indoor
+  # mappingCornerLeafSize: 0.1                    # default: 0.2 - outdoor, 0.1 - indoor
+  mappingLeafSize: 0.3                          # default: 0.4 - outdoor, 0.2 - indoor - VGICP Voxel Grid Filter
 
   # robot motion constraint (in case you are using a 2D robot)
   z_tollerance: 1000                            # meters
@@ -96,12 +102,6 @@ VGICP_SAM:
   globalMapVisualizationSearchRadius: 1000.0    # meters, global map visualization radius
   globalMapVisualizationPoseDensity: 10.0       # meters, global map visualization keyframe density
   globalMapVisualizationLeafSize: 1.0           # meters, global map visualization cloud density
-
-  # G-ICP Parameters
-  TransformationEpsilon : 0.01
-  Resolution : 0.7
-  MaximumIterations : 60
-  MaxCorrespondenceDistance : 1.0
 
 # Navsat (convert GPS coordinates to Cartesian)
 navsat:

@@ -82,6 +82,7 @@ public:
     ros::Subscriber subGPS;
     ros::Subscriber subLoop;
     ros::Subscriber subCNN;
+    ros::Subscriber subCNN_MID;
     ros::ServiceServer srvSaveMap;
 
     std::deque<nav_msgs::Odometry> gpsQueue;
@@ -169,7 +170,18 @@ public:
         subCloud = nh.subscribe<agv_global_module::cloud_info>("RETRIEVAL_MODULE/GLOBAL/feature/cloud_info", 1, &mapOptimization::laserCloudInfoHandler, this, ros::TransportHints().tcpNoDelay());
         subGPS   = nh.subscribe<nav_msgs::Odometry> (gpsTopic, 200, &mapOptimization::gpsHandler, this, ros::TransportHints().tcpNoDelay());
         subLoop  = nh.subscribe<std_msgs::Float64MultiArray>("lio_loop/loop_closure_detection", 1, &mapOptimization::loopInfoHandler, this, ros::TransportHints().tcpNoDelay());
-        subCNN    = nh.subscribe<nav_msgs::Odometry> (cnnTopic, 200, &mapOptimization::cnnHandler, this, ros::TransportHints().tcpNoDelay());
+
+        // typedef nav_msgs::Odometry cnnTopic_Type;
+        // typedef message_filters::sync_policies::ApproximateTime<cnnTopic_Type, cnnTopic_Type> SyncPolicy;
+        // message_filters::Subscriber<cnnTopic_Type> *sub1_, *sub2_;
+        // message_filters::Synchronizer<SyncPolicy>* sync_;
+        // sub1_ = new message_filters::Subscriber<cnnTopic_Type>(nh, cnnTopic, 1);
+        // sub2_ = new message_filters::Subscriber<cnnTopic_Type>(nh, cnnTopic_MID, 1);
+        // sync_ = new message_filters::Synchronizer<SyncPolicy>(SyncPolicy(10), *sub1_, *sub2_);
+        // sync_->registerCallback(boost::bind(&mapOptimization::cnnHandler, this, _1, _2));
+
+        subCNN    = nh.subscribe<nav_msgs::Odometry> (cnnTopic_MID, 200, &mapOptimization::cnnHandler, this, ros::TransportHints().tcpNoDelay());
+        // subCNN_MID    = nh.subscribe<nav_msgs::Odometry> (cnnTopic_MID, 200, &mapOptimization::cnnHandler_MID, this, ros::TransportHints().tcpNoDelay());
 
         srvSaveMap  = nh.advertiseService("RETRIEVAL_MODULE/GLOBAL/save_map", &mapOptimization::saveMapService, this);
 
@@ -272,13 +284,13 @@ public:
     // ROS : GPS CLOUD          Callback
     void gpsHandler(const nav_msgs::Odometry::ConstPtr& gpsMsg)
     {
-        // alignHandler++;
-        // if (alignHandler < 300){
-        //   cout << "ALIGNING : " << alignHandler << endl;
-        //   gpsQueue.push_back(*gpsMsg);
-        // }
+        alignHandler++;
+        if (alignHandler < 1500){
+          cout << "ALIGNING : " << alignHandler << endl;
+          gpsQueue.push_back(*gpsMsg);
+        }
 
-        gpsQueue.push_back(*gpsMsg);
+        // gpsQueue.push_back(*gpsMsg);
 
         geometry_msgs::PoseStamped pose_stamped;
         pose_stamped.header.stamp = gpsMsg->header.stamp;
@@ -296,24 +308,51 @@ public:
 
     }
     // ROS : UTM GT             Callback
+    // void cnnHandler(const nav_msgs::Odometry::ConstPtr& gpsMsg, const nav_msgs::Odometry::ConstPtr& gpsMsg_MID)
+    // {
+
+    //   // GPS too noisy, skip
+    //   float noise_x = 0.2;
+    //   float noise_y = 0.2;
+    //   float noise_z = 0.2;
+
+    //   float gps_x = gpsMsg->pose.pose.position.x;
+    //   float gps_y = gpsMsg->pose.pose.position.y;
+    //   float gps_z = 0.1;
+    //   int   gps_idx = gpsMsg->pose.pose.orientation.x;
+
+    //   gtsam::Vector Vector3(3);
+    //   Vector3 << noise_x, noise_y, noise_z*0.01;
+    //   noiseModel::Diagonal::shared_ptr gps_noise = noiseModel::Diagonal::Variances(Vector3);
+    //   gtsam::GPSFactor gps_factor(gps_idx, gtsam::Point3(gps_x, gps_y, gps_z), gps_noise);
+    //   gtSAMgraph.add(gps_factor);
+
+
+    //   gps_x = gpsMsg_MID->pose.pose.position.x;
+    //   gps_y = gpsMsg_MID->pose.pose.position.y;
+    //   gps_idx = gpsMsg_MID->pose.pose.orientation.x;
+
+    //   gtsam::Vector Vector3_MID(3);
+    //   Vector3_MID << noise_x, noise_y, noise_z*0.01;
+    //   noiseModel::Diagonal::shared_ptr gps_noise_MID = noiseModel::Diagonal::Variances(Vector3_MID);
+    //   gtsam::GPSFactor gps_factor_MID(gps_idx, gtsam::Point3(gps_x, gps_y, gps_z), gps_noise_MID);
+    //   gtSAMgraph.add(gps_factor_MID);
+
+    //   aLoopIsClosed = true;
+    // }
+
     void cnnHandler(const nav_msgs::Odometry::ConstPtr& gpsMsg)
     {
 
       // GPS too noisy, skip
-      float noise_x = 0.2;
-      float noise_y = 0.2;
-      float noise_z = 0.2;
+      float noise_x = 25.0;
+      float noise_y = 25.0;
+      float noise_z = 25.0;
 
       float gps_x = gpsMsg->pose.pose.position.x;
       float gps_y = gpsMsg->pose.pose.position.y;
       float gps_z = 0.1;
       int   gps_idx = gpsMsg->pose.pose.orientation.x;
-
-      // if (!useGpsElevation)
-      // {
-      //     gps_z = transformTobeMapped[5];
-      //     noise_z = 0.01;
-      // }
 
       gtsam::Vector Vector3(3);
       Vector3 << noise_x, noise_y, noise_z*0.01;
@@ -321,9 +360,9 @@ public:
       gtsam::GPSFactor gps_factor(gps_idx, gtsam::Point3(gps_x, gps_y, gps_z), gps_noise);
       gtSAMgraph.add(gps_factor);
 
-
       aLoopIsClosed = true;
     }
+
 
     // --------------------------------------------------------------------------------------------------------------------------------------------
     // VGICP-SAM : UPDATE IMU INITIAL GUESS
@@ -1117,6 +1156,9 @@ public:
       int ret3 = pcl::io::savePCDFileBinary(saveMapDirectory + "/RoadMap.pcd", *roadMapCloud);
       res.success = ret == 0;
 
+        const std::string kitti_format_pg_filename {saveMapDirectory + "optimized_poses.txt"};
+        saveOptimizedVerticesKITTIformat(isamCurrentEstimate, kitti_format_pg_filename);
+
       cout << "------------------------------------------------" << endl;
       cout << "[VGICP-SAM] Saving Map Service END " << endl;
 
@@ -1494,6 +1536,31 @@ public:
     void updatePointAssociateToMap()
     {
         transPointAssociateToMap = trans2Affine3f(transformTobeMapped);
+    }
+
+    void saveOptimizedVerticesKITTIformat(gtsam::Values _estimates, std::string _filename)
+    {
+        using namespace gtsam;
+
+        // ref from gtsam's original code "dataset.cpp"
+        std::fstream stream(_filename.c_str(), fstream::out);
+
+        for(const auto& key_value: _estimates) {
+            auto p = dynamic_cast<const GenericValue<Pose3>*>(&key_value.value);
+            if (!p) continue;
+
+            const Pose3& pose = p->value();
+
+            Point3 t = pose.translation();
+            Rot3 R = pose.rotation();
+            auto col1 = R.column(1); // Point3
+            auto col2 = R.column(2); // Point3
+            auto col3 = R.column(3); // Point3
+
+            stream << col1.x() << " " << col2.x() << " " << col3.x() << " " << t.x() << " "
+                << col1.y() << " " << col2.y() << " " << col3.y() << " " << t.y() << " "
+                << col1.z() << " " << col2.z() << " " << col3.z() << " " << t.z() << std::endl;
+        }
     }
 
 };

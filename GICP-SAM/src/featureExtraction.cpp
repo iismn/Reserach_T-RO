@@ -89,8 +89,8 @@ public:
         // pubSurfacePoints = nh.advertise<sensor_msgs::PointCloud2>("RETRIEVAL_MODULE/GLOBAL/feature/cloud_surface", 1);
         pubFusedPoints = nh.advertise<sensor_msgs::PointCloud2>("RETRIEVAL_MODULE/GLOBAL/feature/cloud_fused", 1);
 
-        pubRoadPoints = nh.advertise<sensor_msgs::PointCloud2>("RETRIEVAL_MODULE/GLOBAL/feature/cloud_road", 1);
-        pubBuildPoints = nh.advertise<sensor_msgs::PointCloud2>("RETRIEVAL_MODULE/GLOBAL/feature/cloud_build", 1);
+        pubRoadPoints = nh.advertise<sensor_msgs::PointCloud2>("RETRIEVAL_MODULE/GLOBAL/feature/cloud_road_RAW", 1);
+        pubBuildPoints = nh.advertise<sensor_msgs::PointCloud2>("RETRIEVAL_MODULE/GLOBAL/feature/cloud_build_RAW", 1);
 
         initializationValue();
     }
@@ -198,7 +198,7 @@ public:
         pcl::fromROSMsg(msgIn_L->cloud_deskewed, *extractedCloud_L); // new cloud for extraction
 
         cloudInfo = *msgIn_R; // new cloud info
-        // cloudHeader = msgIn_R->header; // new cloud header
+        cloudHeader = msgIn_R->header; // new cloud header
         pcl::fromROSMsg(msgIn_R->cloud_deskewed, *extractedCloud_R); // new cloud for extraction
 
         // if(ONLINE_CALIBRATION == 1){

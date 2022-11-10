@@ -1,10 +1,10 @@
 VGICP_SAM:
 
   # Topics
-  pointCloudTopic: "/os1_points"               # Point cloud data
+  pointCloudTopic_M: "/os1_points"               # Point cloud data
   imuTopic: "/imu/data_raw"                         # IMU data
-  odomTopic: "odometry/imu"                   # IMU pre-preintegration odometry, same frequency as IMU
-  gpsTopic: "ublox/fix/odom"                   # GPS odometry topic from navsat, see module_navsat.launch file
+  odomTopic: "/odometry/imu"                   # IMU pre-preintegration odometry, same frequency as IMU
+  gpsTopic: "/gt/odom"                   # GPS odometry topic from navsat, see module_navsat.launch file
 
   # Frames
   lidarFrame: "base_link"
@@ -13,10 +13,10 @@ VGICP_SAM:
   mapFrame: "map"
 
   # GPS Settings
-  useImuHeadingInitialization: false           # if using GPS data, set to "true"
+  useImuHeadingInitialization: true           # if using GPS data, set to "true"
   useGpsElevation: true                      # if GPS elevation is bad, set to "false"
-  gpsCovThreshold: 15                        # m^2, threshold for using GPS data
-  poseCovThreshold: 20                      # m^2, threshold for using GPS data
+  gpsCovThreshold: 0.02                        # m^2, threshold for using GPS data // DGPS 30
+  poseCovThreshold: 1.0                     # m^2, threshold for using GPS data   // DGPS 1.0
 
   # Export settings
   savePCD: false                              # https://github.com/TixiaoShan/LIO-SAM/issues/3
@@ -34,10 +34,10 @@ VGICP_SAM:
   useCloudRing : 1
 
   # IMU Settings
-  imuAccNoise: 3.9939570888238808e-03
-  imuGyrNoise: 1.5636343949698187e-03
-  imuAccBiasN: 6.4356659353532566e-05
-  imuGyrBiasN: 3.5640318696367613e-05
+  imuAccNoise: 0.009939570888238808e-03
+  imuGyrNoise: 0.005636343949698187e-03
+  imuAccBiasN: 0.64356659353532566e-03
+  imuGyrBiasN: 0.35640318696367613e-03
   imuGravity: 9.80511
   imuRPYWeight: 0.01
 
@@ -51,12 +51,12 @@ VGICP_SAM:
                   0, 0, 1]
 
   # PointCloud Params
-  headingDeclination: 0.0         # UTM Declination with Magnetic Pole
-  mappingLeafSize: 0.3                          # Voxel Leaf Size
+  headingDeclination: 0.0                       # UTM Declination with Magnetic Pole
+  mappingLeafSize: 0.2                          # Voxel Leaf Size
 
   # G-ICP Parameters
   TransformationEpsilon : 0.01
-  Resolution : 0.5                              # VGICP Voxel Grid Filter
+  Resolution : 0.6                              # VGICP Voxel Grid Filter
   MaximumIterations : 60
   MaxCorrespondenceDistance : 1.0
 
@@ -76,7 +76,7 @@ VGICP_SAM:
 
   # Loop closure
   odometryLeafSize: 0.05                         # default: 0.4 - outdoor, 0.2 - indoor
-  loopClosureEnableFlag: true
+  loopClosureEnableFlag: false
   loopClosureFrequency: 20                      # Hz, regulate loop closure constraint add frequency
   surroundingKeyframeSize: 50                   # submap size (when loop closure enabled)
   historyKeyframeSearchRadius: 15.0             # meters, key frame that is within n meters from current pose will be considerd for loop closure

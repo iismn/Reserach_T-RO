@@ -5,13 +5,11 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /DL_GLBAL1/PCL1
         - /DL_GLBAL1/iSAM21/GTSAM LC CONST1
-        - /DL_LOCAL1/Map (Filtered)1
-        - /Grid1/Offset1
         - /Odometry1/Shape1
         - /Odometry2/Shape1
-      Splitter Ratio: 0.5742357969284058
+        - /Odometry3/Shape1
+      Splitter Ratio: 0.6069868803024292
     Tree Height: 1318
   - Class: rviz/Selection
     Name: Selection
@@ -46,8 +44,8 @@ Visualization Manager:
               Class: rviz/PointCloud2
               Color: 170; 170; 0
               Color Transformer: FlatColor
-              Decay Time: 10
-              Enabled: false
+              Decay Time: 5
+              Enabled: true
               Invert Rainbow: false
               Max Color: 255; 255; 255
               Max Intensity: 128
@@ -64,7 +62,7 @@ Visualization Manager:
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
-              Value: false
+              Value: true
             - Alpha: 0.5
               Autocompute Intensity Bounds: true
               Autocompute Value Bounds:
@@ -76,8 +74,8 @@ Visualization Manager:
               Class: rviz/PointCloud2
               Color: 170; 85; 255
               Color Transformer: FlatColor
-              Decay Time: 10
-              Enabled: false
+              Decay Time: 5
+              Enabled: true
               Invert Rainbow: false
               Max Color: 255; 255; 255
               Max Intensity: 3181
@@ -94,7 +92,7 @@ Visualization Manager:
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
-              Value: false
+              Value: true
             - Alpha: 1
               Autocompute Intensity Bounds: true
               Autocompute Value Bounds:
@@ -110,9 +108,9 @@ Visualization Manager:
               Enabled: false
               Invert Rainbow: false
               Max Color: 255; 255; 255
-              Max Intensity: 255
+              Max Intensity: 2861
               Min Color: 0; 0; 0
-              Min Intensity: 0
+              Min Intensity: 14
               Name: LIDAR (Top/Deskewed)
               Position Transformer: XYZ
               Queue Size: 5
@@ -137,7 +135,7 @@ Visualization Manager:
               Color: 170; 85; 255
               Color Transformer: Intensity
               Decay Time: 5
-              Enabled: true
+              Enabled: false
               Invert Rainbow: false
               Max Color: 255; 255; 255
               Max Intensity: 137
@@ -154,7 +152,7 @@ Visualization Manager:
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
-              Value: true
+              Value: false
             - Alpha: 0.5
               Autocompute Intensity Bounds: true
               Autocompute Value Bounds:
@@ -167,7 +165,7 @@ Visualization Manager:
               Color: 255; 0; 127
               Color Transformer: Intensity
               Decay Time: 5
-              Enabled: true
+              Enabled: false
               Invert Rainbow: false
               Max Color: 255; 255; 255
               Max Intensity: 124
@@ -184,7 +182,7 @@ Visualization Manager:
               Unreliable: false
               Use Fixed Frame: true
               Use rainbow: true
-              Value: true
+              Value: false
             - Alpha: 1
               Autocompute Intensity Bounds: true
               Autocompute Value Bounds:
@@ -260,9 +258,9 @@ Visualization Manager:
               Enabled: false
               Invert Rainbow: false
               Max Color: 255; 255; 255
-              Max Intensity: 255
+              Max Intensity: 4478
               Min Color: 0; 0; 0
-              Min Intensity: 0
+              Min Intensity: 13
               Name: Map (local)
               Position Transformer: XYZ
               Queue Size: 10
@@ -276,7 +274,7 @@ Visualization Manager:
               Use rainbow: true
               Value: false
             - Alpha: 0.699999988079071
-              Autocompute Intensity Bounds: true
+              Autocompute Intensity Bounds: false
               Autocompute Value Bounds:
                 Max Value: 10
                 Min Value: -10
@@ -285,14 +283,14 @@ Visualization Manager:
               Channel Name: x
               Class: rviz/PointCloud2
               Color: 181; 181; 181
-              Color Transformer: FlatColor
+              Color Transformer: Intensity
               Decay Time: 0
-              Enabled: true
+              Enabled: false
               Invert Rainbow: false
               Max Color: 255; 255; 255
-              Max Intensity: 202.47781372070312
-              Min Color: 0; 0; 0
-              Min Intensity: -108.00288391113281
+              Max Intensity: 200
+              Min Color: 135; 135; 135
+              Min Intensity: 0
               Name: Map (global)
               Position Transformer: XYZ
               Queue Size: 10
@@ -303,9 +301,9 @@ Visualization Manager:
               Topic: /RETRIEVAL_MODULE/GLOBAL/mapping/map_global
               Unreliable: false
               Use Fixed Frame: true
-              Use rainbow: true
-              Value: true
-          Enabled: true
+              Use rainbow: false
+              Value: false
+          Enabled: false
           Name: PCL
         - Class: rviz/Group
           Displays:
@@ -625,14 +623,50 @@ Visualization Manager:
               Use Fixed Frame: true
               Use rainbow: true
               Value: false
+            - Alpha: 1
+              Cell Size: 1
+              Class: rviz/Grid
+              Color: 255; 0; 127
+              Enabled: true
+              Line Style:
+                Line Width: 0.029999999329447746
+                Value: Lines
+              Name: Grid
+              Normal Cell Count: 0
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Plane: XZ
+              Plane Cell Count: 2
+              Reference Frame: base_link
+              Value: true
+            - Alpha: 1
+              Cell Size: 1
+              Class: rviz/Grid
+              Color: 255; 0; 127
+              Enabled: true
+              Line Style:
+                Line Width: 0.029999999329447746
+                Value: Lines
+              Name: Grid
+              Normal Cell Count: 0
+              Offset:
+                X: 0
+                Y: 0
+                Z: 0
+              Plane: XY
+              Plane Cell Count: 10
+              Reference Frame: base_link
+              Value: true
           Enabled: true
           Name: iSAM2
       Enabled: true
       Name: DL_GLBAL
     - Class: rviz/Group
       Displays:
-        - Alpha: 1
-          Autocompute Intensity Bounds: true
+        - Alpha: 0.20000000298023224
+          Autocompute Intensity Bounds: false
           Autocompute Value Bounds:
             Max Value: 10
             Min Value: -10
@@ -644,9 +678,9 @@ Visualization Manager:
           Color Transformer: Intensity
           Decay Time: 0
           Enabled: true
-          Invert Rainbow: false
+          Invert Rainbow: true
           Max Color: 255; 255; 255
-          Max Intensity: 255
+          Max Intensity: 50
           Min Color: 0; 0; 0
           Min Intensity: 0
           Name: Map (Filtered)
@@ -792,42 +826,6 @@ Visualization Manager:
       Transport Hint: raw
       Unreliable: false
       Value: true
-    - Alpha: 1
-      Cell Size: 1
-      Class: rviz/Grid
-      Color: 255; 0; 127
-      Enabled: true
-      Line Style:
-        Line Width: 0.029999999329447746
-        Value: Lines
-      Name: Grid
-      Normal Cell Count: 0
-      Offset:
-        X: 0
-        Y: 0
-        Z: 0
-      Plane: XZ
-      Plane Cell Count: 2
-      Reference Frame: base_link
-      Value: true
-    - Alpha: 1
-      Cell Size: 1
-      Class: rviz/Grid
-      Color: 255; 0; 127
-      Enabled: true
-      Line Style:
-        Line Width: 0.029999999329447746
-        Value: Lines
-      Name: Grid
-      Normal Cell Count: 0
-      Offset:
-        X: 0
-        Y: 0
-        Z: 0
-      Plane: XY
-      Plane Cell Count: 2
-      Reference Frame: base_link
-      Value: true
     - Angle Tolerance: 0.10000000149011612
       Class: rviz/Odometry
       Covariance:
@@ -879,6 +877,40 @@ Visualization Manager:
           Scale: 1
           Value: true
         Value: true
+      Enabled: false
+      Keep: 1000
+      Name: Odometry
+      Position Tolerance: 0.10000000149011612
+      Shape:
+        Alpha: 1
+        Axes Length: 10
+        Axes Radius: 0.5
+        Color: 170; 255; 0
+        Head Length: 1
+        Head Radius: 3
+        Shaft Length: 0.5
+        Shaft Radius: 0.5
+        Value: Arrow
+      Topic: /RETRIEVAL_MODULE/DL/UTM
+      Unreliable: false
+      Value: false
+    - Angle Tolerance: 0.10000000149011612
+      Class: rviz/Odometry
+      Covariance:
+        Orientation:
+          Alpha: 0.5
+          Color: 255; 255; 127
+          Color Style: Unique
+          Frame: Local
+          Offset: 1
+          Scale: 1
+          Value: true
+        Position:
+          Alpha: 0.30000001192092896
+          Color: 204; 51; 204
+          Scale: 1
+          Value: true
+        Value: true
       Enabled: true
       Keep: 1000
       Name: Odometry
@@ -887,13 +919,13 @@ Visualization Manager:
         Alpha: 1
         Axes Length: 10
         Axes Radius: 0.5
-        Color: 255; 25; 0
-        Head Length: 0.30000001192092896
-        Head Radius: 0.10000000149011612
-        Shaft Length: 1
-        Shaft Radius: 0.05000000074505806
-        Value: Axes
-      Topic: /RETRIEVAL_MODULE/DL/UTM
+        Color: 170; 255; 255
+        Head Length: 1
+        Head Radius: 3
+        Shaft Length: 0.5
+        Shaft Radius: 0.5
+        Value: Arrow
+      Topic: /RETRIEVAL_MODULE/DL/UTM_MID
       Unreliable: false
       Value: true
   Enabled: true
@@ -912,25 +944,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 548.235107421875
+      Distance: 625.2428588867188
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -100.59378051757812
-        Y: -102.97235107421875
-        Z: 2.448561906814575
-      Focal Shape Fixed Size: true
+        X: 0.31468522548675537
+        Y: -5.192307949066162
+        Z: -0.06682135909795761
+      Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
       Pitch: 1.5697963237762451
-      Target Frame: <Fixed Frame>
+      Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 0.00039577484130859375
+      Yaw: 4.718581676483154
     Saved: ~
 Window Geometry:
   Displays:
@@ -949,4 +981,4 @@ Window Geometry:
     collapsed: false
   Width: 3840
   X: 2160
-  Y: 490
+  Y: 898

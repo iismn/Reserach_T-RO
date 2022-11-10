@@ -4,7 +4,7 @@ lio_sam:
   pointCloudTopic: "/os1_points"               # Point cloud data
   imuTopic: "/imu/data_raw"                         # IMU data
   odomTopic: "odometry/imu"                   # IMU pre-preintegration odometry, same frequency as IMU
-  gpsTopic: "gt/odomz"                   # GPS odometry topic from navsat, see module_navsat.launch file
+  gpsTopic: "gt/odom"                   # GPS odometry topic from navsat, see module_navsat.launch file
 
   # Frames
   lidarFrame: "base_link"
@@ -15,12 +15,12 @@ lio_sam:
   # GPS Settings
   useImuHeadingInitialization: true           # if using GPS data, set to "true"
   useGpsElevation: true                      # if GPS elevation is bad, set to "false"
-  gpsCovThreshold: 0.07                        # m^2, threshold for using GPS data // DGPS 30
+  gpsCovThreshold: 0.7                        # m^2, threshold for using GPS data // DGPS 30
   poseCovThreshold: 0.1                      # m^2, threshold for using GPS data   // DGPS 1.0
   
   # Export settings
   savePCD: true                              # https://github.com/TixiaoShan/LIO-SAM/issues/3
-  savePCDDirectory: "/home/iismn/WorkSpace_SMB/WSL_LINUX/Research_SW/IEEE_T-RO/Data/MulRan_DCC02/SC_LIO_SAM/"  # use global path, and end with "/" 
+  savePCDDirectory: "/home/iismn/WorkSpace_SMB/WSL_LINUX/Research_SW/IEEE_T-RO/Data/MulRan_KAIST01/SC_LIO_SAM/"  # use global path, and end with "/" 
   # warning: if you have already data in the above savePCDDirectory, it will all remove and remake them. Thus, backup is recommended if pre-made data exist. 
 
   # Sensor Settings

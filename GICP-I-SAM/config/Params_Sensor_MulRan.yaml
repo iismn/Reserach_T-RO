@@ -14,12 +14,12 @@ PHAROS_AGV:
         },
       # Velodyne VLP-16 Hi-RES  LiDAR // MIDDLE
       VLP16_TOP: {
-          xT: 1.7042,
-          yT: -0.021,
-          zT: 0.90235,
+          xT: 0.0,
+          yT: 0.0,
+          zT: 0.0,
           rollT: 0.0,
           pitchT: 0.0,
-          yawT: 179.6654,
+          yawT: 0.0,
         },
 
       # Velodyne VLP-16 Hi-RES  LiDAR // RIGHT
@@ -32,7 +32,7 @@ PHAROS_AGV:
           yawR: 0.301982,
         },
 
-      DESKEW_FLAG: 0
+      DESKEW_FLAG: 1
 
     }
 
@@ -41,7 +41,7 @@ PHAROS_AGV:
         # EB-IMU V5 9-DoF
         xR: 0.0,
         yR: 0.0,
-        zR: -0.2,
+        zR: 0.0,
         rollR: 0.0,
         pitchR: 0.0,
         yawR: 0.0,

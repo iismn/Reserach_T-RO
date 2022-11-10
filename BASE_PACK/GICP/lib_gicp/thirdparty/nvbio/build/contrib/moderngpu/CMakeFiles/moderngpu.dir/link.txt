@@ -1,2 +1,0 @@
-/usr/bin/ar qc libmoderngpu.a CMakeFiles/moderngpu.dir/src/mgpuutil.cpp.o CMakeFiles/moderngpu.dir/src/mmio.cpp.o CMakeFiles/moderngpu.dir/src/sparsematrix.cpp.o CMakeFiles/moderngpu.dir/src/moderngpu_generated_mgpucontext.cu.o
-/usr/bin/ranlib libmoderngpu.a

@@ -13,7 +13,7 @@ VGICP_SAM:
   mapFrame: "map"
 
   # GPS Settings
-  useImuHeadingInitialization: false           # if using GPS data, set to "true"
+  useImuHeadingInitialization: true           # if using GPS data, set to "true"
   useGpsElevation: true                      # if GPS elevation is bad, set to "false"
   gpsCovThreshold: 15                        # m^2, threshold for using GPS data
   poseCovThreshold: 20                      # m^2, threshold for using GPS data

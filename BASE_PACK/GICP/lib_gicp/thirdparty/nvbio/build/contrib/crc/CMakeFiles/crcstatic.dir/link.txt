@@ -1,2 +1,0 @@
-/usr/bin/ar qc libcrcstatic.a CMakeFiles/crcstatic.dir/crc.o
-/usr/bin/ranlib libcrcstatic.a

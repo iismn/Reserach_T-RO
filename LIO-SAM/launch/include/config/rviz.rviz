@@ -7,8 +7,8 @@ Panels:
         - /links1/map1
         - /links1/base_link1
         - /Point Cloud1/PCL VELODYNE1
+        - /Feature Cloud1
         - /Mapping1
-        - /Mapping1/Path (local)1
       Splitter Ratio: 0.5600000023841858
     Tree Height: 1737
   - Class: rviz/Selection
@@ -353,7 +353,7 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
-      Enabled: false
+      Enabled: true
       Name: Feature Cloud
     - Class: rviz/Group
       Displays:
@@ -369,12 +369,12 @@ Visualization Manager:
           Color: 255; 255; 255
           Color Transformer: Intensity
           Decay Time: 5
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
-          Max Intensity: 255
+          Max Intensity: 3464
           Min Color: 0; 0; 0
-          Min Intensity: 0
+          Min Intensity: 10
           Name: Map (cloud)
           Position Transformer: XYZ
           Queue Size: 10
@@ -386,7 +386,7 @@ Visualization Manager:
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -427,13 +427,13 @@ Visualization Manager:
           Channel Name: intensity
           Class: rviz/PointCloud2
           Color: 255; 255; 255
-          Color Transformer: FlatColor
+          Color Transformer: Intensity
           Decay Time: 0
           Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
-          Max Intensity: 5813
-          Min Color: 0; 0; 0
+          Max Intensity: 5944
+          Min Color: 102; 102; 102
           Min Intensity: 10
           Name: Map (global)
           Position Transformer: XYZ
@@ -445,13 +445,13 @@ Visualization Manager:
           Topic: /lio_sam/mapping/map_global
           Unreliable: false
           Use Fixed Frame: true
-          Use rainbow: true
+          Use rainbow: false
           Value: true
         - Alpha: 1
           Buffer Length: 1
           Class: rviz/Path
           Color: 85; 255; 255
-          Enabled: true
+          Enabled: false
           Head Diameter: 0.30000001192092896
           Head Length: 0.20000000298023224
           Length: 0.30000001192092896
@@ -467,9 +467,9 @@ Visualization Manager:
           Radius: 0.029999999329447746
           Shaft Diameter: 0.10000000149011612
           Shaft Length: 0.10000000149011612
-          Topic: /ublox/ins/gps_path
+          Topic: /lio_sam/mapping/path
           Unreliable: false
-          Value: true
+          Value: false
         - Alpha: 1
           Buffer Length: 1
           Class: rviz/Path
@@ -490,7 +490,7 @@ Visualization Manager:
           Radius: 0.029999999329447746
           Shaft Diameter: 0.10000000149011612
           Shaft Length: 0.10000000149011612
-          Topic: /lio_sam/mapping/path
+          Topic: /lio_sam/imu/path
           Unreliable: false
           Value: true
         - Alpha: 1
@@ -597,7 +597,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 51.17424774169922
+      Distance: 113.62033081054688
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -612,10 +612,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.419796109199524
+      Pitch: 0.7347957491874695
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 3.4638848304748535
+      Yaw: 3.222067356109619
     Saved: ~
 Window Geometry:
   Displays:
@@ -632,4 +632,4 @@ Window Geometry:
     collapsed: true
   Width: 3840
   X: 2160
-  Y: 490
+  Y: 1015

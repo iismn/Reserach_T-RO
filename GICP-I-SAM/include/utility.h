@@ -88,6 +88,7 @@ public:
     string odomTopic;
     string gpsTopic;
     string cnnTopic;
+    string cnnTopic_MID;
     //Frames
     string lidarFrame;
     string baselinkFrame;
@@ -195,6 +196,7 @@ public:
         nh.param<std::string>("VGICP_SAM/odomTopic", odomTopic, "odometry/imu");
         nh.param<std::string>("VGICP_SAM/gpsTopic", gpsTopic, "odometry/gps");
         nh.param<std::string>("VGICP_SAM/DL_topic", cnnTopic, "RETRIEVAL_MODULE/DL/UTM");
+        nh.param<std::string>("VGICP_SAM/DL_topic_MID", cnnTopic_MID, "RETRIEVAL_MODULE/DL/UTM_MID");
 
         nh.param<std::string>("VGICP_SAM/lidarFrame", lidarFrame, "base_link");
         nh.param<std::string>("VGICP_SAM/baselinkFrame", baselinkFrame, "base_link");

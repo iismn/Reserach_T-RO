@@ -3,11 +3,11 @@ VGICP_SAM:
   # Topics
   pointCloudTopic_L: "vlp_l/velodyne_points"               # Point cloud data - LEFT
   pointCloudTopic_M: "vlp_t/velodyne_points"               # Point cloud data - TOP
-  pointCloudTopic_T: "vlp_r/velodyne_points"               # Point cloud data - RIGHT
+  pointCloudTopic_R: "vlp_r/velodyne_points"               # Point cloud data - RIGHT
 
-  pointCloudTopic_M : "os_cloud_node/points"
+  # pointCloudTopic_M : "os_cloud_node/points"
 
-  imuTopic: "xsens/imu/data"                                     # IMU data
+  imuTopic: "imu/data"                                     # IMU data
   odomTopic: "odometry/imu"                                # IMU pre-preintegration odometry, same frequency as IMU
   gpsTopic: "ublox/fix/odom"                                 # GPS odometry topic from navsat, see module_navsat.launch file
 
@@ -21,21 +21,21 @@ VGICP_SAM:
   loopClosureEnableFlag: false
   useImuHeadingInitialization: true           # if using GPS data, set to "true"
   useGpsElevation: true                       # if GPS elevation is bad, set to "false"
-  gpsCovThreshold: 0.008                        # m^2, threshold for using GPS data
-  poseCovThreshold: 0.1                      # m^2, threshold for using GPS data
+  gpsCovThreshold: 0.01                        # m^2, threshold for using GPS data
+  poseCovThreshold: 0.008                      # m^2, threshold for using GPS data
 
   # Export settings
   savePCD: false
   savePCDDirectory: "/Downloads/LOAM/"        # in your home folder, starts and ends with "/". Warning: the code deletes "LOAM" folder then recreates it. See "mapOptimization" for implementation
 
   # Sensor Settings
-  sensor: ouster                            # lidar sensor type, either 'velodyne' or 'ouster'
-  N_SCAN: 128                                  # number of lidar channel (i.e., 16, 32, 64, 128)
-  Horizon_SCAN: 1024                          # lidar horizontal resolution (Velodyne:1800, Ouster:512,1024,2048)
+  sensor: velodyne                            # lidar sensor type, either 'velodyne' or 'ouster'
+  N_SCAN: 16                                  # number of lidar channel (i.e., 16, 32, 64, 128)
+  Horizon_SCAN: 1800                          # lidar horizontal resolution (Velodyne:1800, Ouster:512,1024,2048)
   downsampleRate: 1                           # default: 1. Downsample your data if too many points. i.e., 16 = 64 / 4, 16 = 16 / 1
   lidarMinRange: 1.0                          # default: 1.0, minimum lidar range to be used
   lidarMaxRange: 500.0                       # default: 1000.0, maximum lidar range to be used
-  MultiLidarEnableFlag : 0                    # Using Multi-LiDAR Fusion / 0 for Single LiDAR
+  MultiLidarEnableFlag : 3                    # Using Multi-LiDAR Fusion / 0 for Single LiDAR
   MultiLidarOnlineCalibration : 0             # Online LiDAR Calibration for uncertainty Propagation
   useCloudRing : 1
 

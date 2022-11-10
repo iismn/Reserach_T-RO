@@ -508,10 +508,19 @@ public:
         pcl::PointCloud<PointType>::Ptr globalSurfCloud(new pcl::PointCloud<PointType>());
         pcl::PointCloud<PointType>::Ptr globalSurfCloudDS(new pcl::PointCloud<PointType>());
         pcl::PointCloud<PointType>::Ptr globalMapCloud(new pcl::PointCloud<PointType>());
+        
         for (int i = 0; i < (int)cloudKeyPoses3D->size(); i++) {
             *globalCornerCloud += *transformPointCloud(cornerCloudKeyFrames[i],  &cloudKeyPoses6D->points[i]);
             *globalSurfCloud   += *transformPointCloud(surfCloudKeyFrames[i],    &cloudKeyPoses6D->points[i]);
             cout << "\r" << std::flush << "Processing feature cloud " << i << " of " << cloudKeyPoses6D->size() << " ...";
+
+            pcl::PointCloud<PointType>::Ptr local_PCD(new pcl::PointCloud<PointType>());
+            *local_PCD += *surfCloudKeyFrames[i];
+            *local_PCD += *cornerCloudKeyFrames[i];
+
+            char filename [50];
+            sprintf(filename, "%08d", i);
+            pcl::io::savePCDFileBinary(savePCDDirectory + "/" + filename + ".pcd", *local_PCD);
         }
         // down-sample and save corner cloud
         downSizeFilterCorner.setInputCloud(globalCornerCloud);

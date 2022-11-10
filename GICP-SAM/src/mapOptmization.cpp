@@ -78,6 +78,9 @@ public:
     ros::Publisher pubCloudRegisteredRaw;
     ros::Publisher pubLoopConstraintEdge;
 
+    ros::Publisher pubRoadPoints;
+    ros::Publisher pubBuildPoints;
+
     ros::Subscriber subCloud;
     ros::Subscriber subGPS;
     ros::Subscriber subLoop;
@@ -181,6 +184,9 @@ public:
         pubRecentKeyFrame     = nh.advertise<sensor_msgs::PointCloud2>("RETRIEVAL_MODULE/GLOBAL/mapping/cloud_registered", 1);
         pubCloudRegisteredRaw = nh.advertise<sensor_msgs::PointCloud2>("RETRIEVAL_MODULE/GLOBAL/mapping/cloud_registered_raw", 1);
 
+        pubRoadPoints = nh.advertise<sensor_msgs::PointCloud2>("RETRIEVAL_MODULE/GLOBAL/feature/cloud_road", 1);
+        pubBuildPoints = nh.advertise<sensor_msgs::PointCloud2>("RETRIEVAL_MODULE/GLOBAL/feature/cloud_build", 1);
+
         downSizeFilterVGICP.setLeafSize(mappingLeafSize, mappingLeafSize, mappingLeafSize);
         downSizeFilterICP.setLeafSize(mappingLeafSize, mappingLeafSize, mappingLeafSize);
         downSizeFilterSurroundingKeyPoses.setLeafSize(surroundingKeyframeDensity, surroundingKeyframeDensity, surroundingKeyframeDensity); // for surrounding key poses of scan-to-map optimization
@@ -273,7 +279,7 @@ public:
     void gpsHandler(const nav_msgs::Odometry::ConstPtr& gpsMsg)
     {
         // alignHandler++;
-        // if (alignHandler < 300){
+        // if (alignHandler < 800){
         //   cout << "ALIGNING : " << alignHandler << endl;
         //   gpsQueue.push_back(*gpsMsg);
         // }
@@ -300,27 +306,20 @@ public:
     {
 
       // GPS too noisy, skip
-      float noise_x = 0.2;
-      float noise_y = 0.2;
-      float noise_z = 0.2;
+      float noise_x = 25.0;
+      float noise_y = 25.0;
+      float noise_z = 25.0;
 
       float gps_x = gpsMsg->pose.pose.position.x;
       float gps_y = gpsMsg->pose.pose.position.y;
       float gps_z = 0.1;
       int   gps_idx = gpsMsg->pose.pose.orientation.x;
 
-      // if (!useGpsElevation)
-      // {
-      //     gps_z = transformTobeMapped[5];
-      //     noise_z = 0.01;
-      // }
-
       gtsam::Vector Vector3(3);
       Vector3 << noise_x, noise_y, noise_z*0.01;
       noiseModel::Diagonal::shared_ptr gps_noise = noiseModel::Diagonal::Variances(Vector3);
       gtsam::GPSFactor gps_factor(gps_idx, gtsam::Point3(gps_x, gps_y, gps_z), gps_noise);
       gtSAMgraph.add(gps_factor);
-
 
       aLoopIsClosed = true;
     }
@@ -670,6 +669,7 @@ public:
         CloudKeyFrames.push_back(thisKeyFrame);
         CloudKeyFramesBUILD.push_back(thisKeyFrameBUILD);
         CloudKeyFramesROAD.push_back(thisKeyFrameROAD);
+
         // save path for visualization
         updatePath(thisPose6D);
     }
@@ -956,6 +956,8 @@ public:
         if (cloudKeyPoses3D->points.empty())
             return;
         // publish key poses
+        publishCloud(&pubRoadPoints, laserCloudLastROAD, timeLaserInfoStamp, odometryFrame);
+        publishCloud(&pubBuildPoints, laserCloudLastBUILD, timeLaserInfoStamp, odometryFrame);
         publishCloud(&pubKeyPoses, cloudKeyPoses3D, timeLaserInfoStamp, odometryFrame);
         // Publish surrounding key frames
         publishCloud(&pubRecentKeyFrames, laserCloudFromMapDS, timeLaserInfoStamp, odometryFrame);

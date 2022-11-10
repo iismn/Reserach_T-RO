@@ -269,7 +269,8 @@ public:
         ROAD_SEG.setInputCloud (fusedCloud);
         ROAD_SEG.setFilterFieldName ("z");
         // ROAD_SEG.setFilterLimits (-3, -1.72); // {PHAROS}
-        ROAD_SEG.setFilterLimits (-3, 0.2); // {IRAP, MulRan}
+        ROAD_SEG.setFilterLimits (-3, 0.2); // {IRAP}
+        // ROAD_SEG.setFilterLimits (-3, -1.63); // {MulRan}
         ROAD_SEG.filter (*roadCloud);
 
         pcl::PassThrough<PointType> BUILD_SEG;
