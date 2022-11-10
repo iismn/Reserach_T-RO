@@ -134,12 +134,12 @@ class Localization_MAIN():
         localizer_PARM.iter = localizer_PARM.iter + 1
 
         # SAVE IMAGE
-        F_Path_IMG = '/home/iismn/WorkSpace/Research/ComplexUrban_33/DeepLearningDB/3D/'
+        F_Path_IMG = '/home/iismn/WorkSpace/Database/ComplexUrbanDataset/RawData/Urban 15/DeepLearning/3D/'
         F_Name = str(localizer_PARM.iter).zfill(8)
         cv2.imwrite(F_Path_IMG + F_Name + ".png",input_img_Q)
 
         # SAVE POS
-        F_Path_POS = '/home/iismn/WorkSpace/Research/ComplexUrban_33/DeepLearningDB/POS_3D/'
+        F_Path_POS = '/home/iismn/WorkSpace/Database/ComplexUrbanDataset/RawData/Urban 15/DeepLearning/POS_3D/'
         POS = np.array([Vehicle_Pos_X, Vehicle_Pos_Y])
         UTM_POS = POS + self.init_Pos
         UTM_POS = np.array(UTM_POS).reshape((1,2))

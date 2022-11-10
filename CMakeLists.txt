@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   tf2
 )
+find_package(Boost REQUIRED python3)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed

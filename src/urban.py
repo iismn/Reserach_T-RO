@@ -13,7 +13,7 @@ from PIL import Image
 from sklearn.neighbors import NearestNeighbors
 import h5py
 
-root_dir = '/home/iismn/WorkSpace/CU11_DL/ROS/src/RESEARCH_PACK/OSM_NetVLAD/src/datasets/LSM3/'
+root_dir = '/home/iismn/WorkSpace/CU11_DL/ROS/src/RESEARCH_PACK/OSM_NetVLAD/src/datasets/Urban_25K/'
 if not exists(root_dir):
     raise FileNotFoundError('[WARNING] ROOT Directory Hard-Coded / Adjust dataset Source')
 
@@ -48,7 +48,7 @@ def get_val_query_set():
                              input_transform=input_transform())
 
 def get_whole_test_set(onlyDB=False):
-    structFile = join(struct_dir, 'OSM_Test_KAIST_NORTH.mat')
+    structFile = join(struct_dir, 'Urban_25K_DCC.mat')
     return WholeDatasetFromStruct(structFile,
                              input_transform=input_transform(),
                              onlyDB=onlyDB)
